@@ -1,2 +1,2 @@
-С помощью фреймворка flask реализовать простейший сервис калькулятора, имеющий один метод GET. Данному методу в качестве параметра expr передается строка с формулой для вычисления.
-Возможные используемые функции - все функции модуля math, также возможно наличие выражения в скобках.
+A simple calculator service implemented using the flask framework. Service has one method GET. 
+This method is passed a string with the formula to be calculated as the expr parameter.
