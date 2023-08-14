@@ -18,6 +18,7 @@ pipeline {
     stage('Run calc') {
       steps {
         container('python') {
+          sh 'pip3 install flask'
           sh 'python3 main.py'
         }
       }
