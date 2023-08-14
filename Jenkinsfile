@@ -7,7 +7,7 @@ pipeline {
         spec:
           containers:
           - name: python
-            image: python:alpine
+            image: python
             command:
             - cat
             tty: true
@@ -18,7 +18,7 @@ pipeline {
     stage('Run calc') {
       steps {
         container('python') {
-          sh 'python main.py'
+          sh 'python3 main.py'
         }
       }
     }
