@@ -10,7 +10,7 @@ python main.py
 
 ## Example of using the site
 
-The main page of the site:
+The main page of the site 1:
 
 <img src="https://github.com/SnezhanaM/Web-calculator/blob/master/pictures/main_page.png" width="600" height="250"/>
 
