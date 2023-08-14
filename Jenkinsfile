@@ -20,7 +20,7 @@ pipeline {
         container('python') {
           sh 'pip3 install flask'
           sh 'pip3 install python-daemon'
-          sh 'python3 main.py'
+          sh 'nohup python3 main.py &'
         }
       }
     }
