@@ -60,5 +60,14 @@ podTemplate(yaml: '''
         }
       }
     }
+    stage('Deploy calc Image') {
+      container('kubectl') {
+        stage('Deploy calc project') {
+          sh '''
+            kubectl apply -f deployment.yaml -n jenkins-ns
+          '''
+        }
+      }
+    }
   }
 }
