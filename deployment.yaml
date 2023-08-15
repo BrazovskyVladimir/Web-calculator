@@ -36,6 +36,7 @@ kind: Ingress
 metadata:
   name: calc-ingress
 spec:
+  ingressClassName: nginx
   rules:
   - host: calc-diplom.local
     http:
