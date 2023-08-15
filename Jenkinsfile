@@ -26,7 +26,7 @@ podTemplate(yaml: '''
         - 99d
         volumeMounts:
         - name: kubectl-secret
-          mountPath: /.kube/config
+          mountPath: /home/jenkins/.kube/config
       restartPolicy: Never
       volumes:
       - name: kubectl-secret
