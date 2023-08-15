@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calc-deployment
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: my-python-calc
+  template:
+    metadata:
+      labels:
+        app: my-python-calc
+    spec:
+      containers:
+      - name: my-python-calc
+        image: brazovsky/calc:latest
+        ports:
+        - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: calc-service
+spec:
+  selector:
+    app: my-python-calc
+  ports:
+    - protocol: TCP
+      port: 5000  
+      targetPort: 5000  
+  type: ClusterIP  
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: calc-ingress
+spec:
+  rules:
+  - host: calc-diplom.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: calc-service
+            port:
+              number: 5000
