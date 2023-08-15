@@ -18,7 +18,7 @@ pipeline {
         // Customize these environment variables as needed
         DOCKER_REGISTRY_CREDENTIALS = credentials('docker-registry-credentials')
         KUBE_CONFIG_CREDENTIALS = credentials('kube-config-credentials')
-        IMAGE_NAME = 'my-python-app'
+        IMAGE_NAME = 'python'
         IMAGE_TAG = "${env.BUILD_NUMBER}"
         KUBE_NAMESPACE = 'jenkins-ns'
         KUBE_DEPLOYMENT_NAME = 'my-webcalc'
