@@ -48,15 +48,5 @@ podTemplate(yaml: '''
         }
       }
     }
-    stage('Deploy to Kubernetes') {
-            steps {
-                script {
-                    withCredentials([kubeconfigFile(credentialsId: "${KUBE_CONFIG_CREDENTIALS}", variable: 'KUBECONFIG')]) {
-                        sh "kubectl --kubeconfig=${KUBECONFIG} apply -f kubernetes/deployment.yaml -n ${KUBE_NAMESPACE}"
-                    }
-                }
-            }
-        }
-
   }
 }
