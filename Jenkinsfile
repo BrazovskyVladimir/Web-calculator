@@ -24,8 +24,14 @@ podTemplate(yaml: '''
         - sleep
         args:
         - 99d
+        volumeMounts:
+        - name: kubectl-secret
+          mountPath: /.kube/config
       restartPolicy: Never
       volumes:
+      - name: kubectl-secret
+        secret:
+            secretName: admin-conf-secret 
       - name: kaniko-secret
         secret:
             secretName: dockercred
