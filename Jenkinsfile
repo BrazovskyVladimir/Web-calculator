@@ -43,6 +43,9 @@ pipeline {
             script {
                 def result = sh(returnStdout: true, script: 'curl "http://127.0.0.1:5000/?expr=5%2A%28200%2B50%29%2F10"').trim()
                 echo "Result: ${result}"
+                if (result != '125') {
+                    error "Result is not equal to 125. Stopping the job."
+                }
             }
         }
       }
