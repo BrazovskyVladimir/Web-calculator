@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: my-python-calc
-        image: brazovsky/calc:latest
+        image: brazovsky/calc
         ports:
         - containerPort: 5000
 ---
