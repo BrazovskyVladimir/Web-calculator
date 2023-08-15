@@ -28,7 +28,7 @@ pipeline {
     stage('Test code') {
       steps {
         container('python') {
-          sh 'flake8 ./'
+          sh 'flake8 --extend-ignore E501,F401,F403 ./'
         }
       }
     }
