@@ -64,7 +64,7 @@ podTemplate(yaml: '''
       container('kubectl') {
         stage('Deploy calc project') {
           sh '''
-            kubectl apply -f ./deployment.yaml -n default
+            kubectl apply -f ./deployment.yaml
           '''
         }
       }
