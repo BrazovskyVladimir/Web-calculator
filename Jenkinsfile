@@ -19,9 +19,7 @@ pipeline {
       steps {
         container('python') {
           sh 'pip3 install flask'
-          sh 'pip3 install python-daemon'
           sh 'pip3 install flake8'
-          
         }
       }
     }
@@ -39,7 +37,7 @@ pipeline {
         }
       }
     }
-    stage('Run test') {
+    stage('Test calc and server') {
       steps {
         container('python') {
           sh 'curl "http://127.0.0.1:5000/?expr=5%2A%28200%2B50%29%2F10"'
