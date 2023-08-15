@@ -64,6 +64,7 @@ podTemplate(yaml: '''
       container('kubectl') {
         stage('Deploy calc project') {
           sh '''
+            date
             kubectl apply -f /home/jenkins/agent/workspace/calcdeploy/deployment.yaml
           '''
         }
