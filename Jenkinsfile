@@ -40,8 +40,8 @@ pipeline {
     stage('Test calc and server') {
       steps {
         container('python') {
-          sh 'result = $(curl "http://127.0.0.1:5000/?expr=5%2A%28200%2B50%29%2F10")'
-          sh '$result'
+          sh '$result = $(curl "http://127.0.0.1:5000/?expr=5%2A%28200%2B50%29%2F10")'
+          sh 'echo $result'
         }
       }
     }
