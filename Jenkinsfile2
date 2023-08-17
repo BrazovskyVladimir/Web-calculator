@@ -28,11 +28,10 @@ pipeline {
             steps {
               container('kubectl') {
                 script {
-                    kubectl apply -f deployment.yaml -n jenkins-ns
+                    sh 'kubectl apply -f deployment.yaml -n jenkins-ns'
                     }
-                }
               }
             }
         }
-    
+  }
 }
