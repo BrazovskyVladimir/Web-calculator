@@ -60,16 +60,6 @@ podTemplate(yaml: '''
         }
       }
     }
-    stage('Deploy calc Image') {
-      container('kubectl') {
-        stage('Deploy calc project') {
-          sh '''
-            #!/bin/sh
-            date
-
-          '''
-        }
-      }
-    }
+   
   }
 }
