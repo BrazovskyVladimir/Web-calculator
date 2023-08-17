@@ -18,20 +18,8 @@ podTemplate(yaml: '''
         volumeMounts:
         - name: kaniko-secret
           mountPath: /kaniko/.docker
-      - name: kubectl
-        image: bitnami/kubectl
-        command:
-        - sleep
-        args:
-        - 99d
-        volumeMounts:
-        - name: kubectl-secret
-          mountPath: /home/jenkins/.kube
       restartPolicy: Never
       volumes:
-      - name: kubectl-secret
-        secret:
-            secretName: admin-conf-secret 
       - name: kaniko-secret
         secret:
             secretName: dockercred
