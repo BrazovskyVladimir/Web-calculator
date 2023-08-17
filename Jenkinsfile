@@ -1,4 +1,7 @@
-podTemplate(yaml: '''
+pipeline {
+  agent {
+    kubernetes {
+      yaml '''
     apiVersion: v1
     kind: Pod
     spec:
@@ -26,28 +29,31 @@ podTemplate(yaml: '''
             items:
             - key: .dockerconfigjson
               path: config.json
-''') {
-  node(POD_LABEL) {
-    stage('Get calc project') {
-      git url: 'https://github.com/BrazovskyVladimir/Web-calculator.git', branch: 'master'
-      container('python') {
-        stage('Build calc project') {
-          sh '''
-          echo pwd
-          '''
+        '''
+        }
+        }
+   
+  stages {
+        stage('Build') {
+            steps {
+              container('python') {
+                script {
+                 
+          sh 'echo pwd'
+          
         }
       }
     }
-
-    stage('Build calc Image') {
-      container('kaniko') {
-        stage('Build calc project') {
-          sh '''
-            /kaniko/executor --context `pwd` --destination brazovsky/calc:1.0
-          '''
+}
+        stage('Push') {
+            steps {
+              container('kaniko') {
+                script {
+          sh '/kaniko/executor --context `pwd` --destination brazovsky/calc:1.0'
         }
       }
     }
+  }
   }
     post {
      success {
