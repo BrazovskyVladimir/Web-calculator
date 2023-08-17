@@ -39,6 +39,7 @@ pipeline {
         container('python') {
           sh 'pip3 install flask'
           sh 'pip3 install flake8'
+          sh 'pip3 install prometheus-flask-exporter'
         }
       }
     }
