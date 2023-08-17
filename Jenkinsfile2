@@ -6,12 +6,11 @@ pipeline {
         kind: Pod
         spec:
           containers:
-          - name: kubectl
-            image: bitnami/kubectl
+          - name: runkubectl
+            image: apline
             command:
-            - sleep
-            args:
-            - 99d
+            - cat
+            tty: true
             volumeMounts:
             - name: kubectl-secret
               mountPath: /home/jenkins/.kube
@@ -35,9 +34,12 @@ pipeline {
   stages {
         stage('Deploy to Kubernetes') {
             steps {
-              container('kubectl') {
+              container('runkubectl') {
                 script {
-                    sh "/opt/bitnami/kubectl/bin/kubectl --kubeconfig=/home/jenkins/.kube/config apply -f /home/jenkins/agent/workspace/calcdeploy2/deployment.yaml"
+                    sh 'curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl'
+                    sh 'chmod +x ./kubectl'
+                    sh 'mv ./kubectl /usr/bin/kubectl'
+                    sh '/usr/bin/kubectl --kubeconfig=/home/jenkins/.kube/config apply -f /home/jenkins/agent/workspace/calcdeploy2/deployment.yaml'
                     
                 }
               }
