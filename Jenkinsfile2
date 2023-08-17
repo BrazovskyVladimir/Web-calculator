@@ -27,9 +27,7 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
               container('kubectl') {
-                script {
-                    sh 'kubectl apply -f deployment.yaml -n jenkins-ns'
-                    }
+                kubernetesDeploy(configs: "deployment.yaml")
               }
             }
         }
