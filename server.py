@@ -5,6 +5,7 @@ from prometheus_flask_exporter import PrometheusMetrics
 
 def create_server():
     app = Flask(__name__)
+    
     metrics = PrometheusMetrics(app)
     
     @app.route('/', methods=['GET'])
