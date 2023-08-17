@@ -37,9 +37,8 @@ pipeline {
             steps {
               container('kubectl') {
                 script {
-                    withCredentials([kubeconfigFile(credentialsId: "${KUBE_CONFIG_CREDENTIALS}", variable: 'KUBECONFIG')]) {
-                        sh "kubectl --kubeconfig=${KUBECONFIG} apply -f deployment.yaml -n ${KUBE_NAMESPACE}"
-                    }
+                    sh "kubectl --kubeconfig=/home/jenkins/.kube/config apply -f deployment.yaml"
+                    
                 }
               }
             }
