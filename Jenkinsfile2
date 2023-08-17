@@ -23,11 +23,24 @@ pipeline {
         '''
     }
   }
+  environment {
+        // Customize these environment variables as needed
+        DOCKER_REGISTRY_CREDENTIALS = credentials('docker-registry-credentials')
+        KUBE_CONFIG_CREDENTIALS = credentials('kube-config-credentials')
+        IMAGE_NAME = 'my-python-app'
+        IMAGE_TAG = "${env.BUILD_NUMBER}"
+        KUBE_NAMESPACE = 'jenkins-ns'
+        KUBE_DEPLOYMENT_NAME = 'my-webcalc'
+  }
   stages {
         stage('Deploy to Kubernetes') {
             steps {
               container('kubectl') {
-                kubernetesDeploy(configs: "deployment.yaml")
+                script {
+                    withCredentials([kubeconfigFile(credentialsId: "${KUBE_CONFIG_CREDENTIALS}", variable: 'KUBECONFIG')]) {
+                        sh "kubectl --kubeconfig=${KUBECONFIG} apply -f deployment.yaml -n ${KUBE_NAMESPACE}"
+                    }
+                }
               }
             }
         }
