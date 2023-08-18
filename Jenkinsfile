@@ -94,7 +94,7 @@ pipeline {
   }
     stage('gzip') {
         steps {
-            sh "tar -zcvf calc.build-${env.BUILD_NUMBER}.gz ./*.py"
+            sh "tar -zcvf calcdeploy.build-${env.BUILD_NUMBER}.gz ./*.py"
             archiveArtifacts artifacts: "calcdeploy.build-${env.BUILD_NUMBER}.gz"
         }
     }
