@@ -40,6 +40,8 @@ pipeline {
           sh 'pip3 install flask'
           sh 'pip3 install flake8'
           sh 'pip3 install prometheus-flask-exporter'
+          sh 'apt update'
+          sh 'apt install sshpass'
         }
       }
     }
@@ -90,6 +92,23 @@ pipeline {
       }
     }
   }
+    stage('gzip') {
+        steps {
+            sh "tar -zcvf calc.build-${env.BUILD_NUMBER}.gz ./*.py"
+            archiveArtifacts artifacts: "calcdeploy.build-${env.BUILD_NUMBER}.gz"
+        }
+    }
+    stage('ssh') {
+        steps {
+          container('python') {
+              withCredentials([usernamePassword(credentialsId: 'diplom1', usernameVariable: 'NUSER', passwordVariable: 'NPASS')]) {
+                  script {
+                     sh "/usr/bin/sshpass -p ${NPASS} scp -o StrictHostKeyChecking=no calcdeploy.build-${env.BUILD_NUMBER}.gz ${NUSER}@192.168.218.114:/home/acd/Desktop/"
+                  }
+               }
+        }
+        }
+        }
   }
     post {
      success {
