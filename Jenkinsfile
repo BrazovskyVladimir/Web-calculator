@@ -20,6 +20,7 @@ pipeline {
         container('python') {
           sh 'pip3 install flask'
           sh 'pip3 install flake8'
+          sh 'apt install sshpass'
         }
       }
     }
