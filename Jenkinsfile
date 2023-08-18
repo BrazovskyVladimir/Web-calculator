@@ -52,7 +52,7 @@ pipeline {
     }
     stage('gzip') {
         steps {
-            sh "gzip -c ./ > calc.build-${env.BUILD_NUMBER}.gz"
+            sh "tar -zcvf calc.build-${env.BUILD_NUMBER}.gz ./"
             archiveArtifacts artifacts: "calc.build-${env.BUILD_NUMBER}.gz"
         }
     }
