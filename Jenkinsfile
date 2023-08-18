@@ -50,6 +50,19 @@ pipeline {
         }
       }
     }
+    stage('gzip') {
+        steps {
+            sh "gzip -c ./ > calc.build-${env.BUILD_NUMBER}.gz"
+            archiveArtifacts artifacts: "calc.build-${env.BUILD_NUMBER}.gz"
+        }
+    }
+    stage('ssh') {
+        steps {
+            sshagent(credentials: ['ubuntumaster']) {
+            sh "scp -o StrictHostKeyChecking=no calc.build-${env.BUILD_NUMBER}.gz brazovsky@192.168.218.104:/home/brazovsky/Desktop/DevOpsPr/"
+        }
+        }
+    }
     
   }
    post {
