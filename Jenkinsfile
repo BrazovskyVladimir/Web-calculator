@@ -58,8 +58,9 @@ pipeline {
     }
     stage('ssh') {
         steps {
-              withCredentials([sshUserPrivateKey(credentialsId: "ubuntumaster", keyFileVariable: 'keyfile')]) {
-                     sh "scp -o StrictHostKeyChecking=no -i ${keyfile} calc.build-${env.BUILD_NUMBER}.gz brazovsky@192.168.218.104:/home/brazovsky/Desktop/DevOpsPr/"
+              withCredentials([usernamePassword(credentialsId: 'diplom1', usernameVariable: 'NUSER', passwordVariable: 'NPASS')]) {
+                     sh "apt install -y sshpass"
+                     sh "sshpass -p ${NPASS} scp -o StrictHostKeyChecking=no calc.build-${env.BUILD_NUMBER}.gz ${NUSER}@192.168.218.114:/home/acd/Desktop/"
                   
                }
         }
