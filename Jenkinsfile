@@ -62,7 +62,7 @@ pipeline {
         steps {
               withCredentials([usernamePassword(credentialsId: 'diplom1', usernameVariable: 'NUSER', passwordVariable: 'NPASS')]) {
                   script {
-                     sh "sshpass -p ${NPASS} scp -o StrictHostKeyChecking=no calc.build-${env.BUILD_NUMBER}.gz ${NUSER}@192.168.218.114:/home/acd/Desktop/"
+                     sh "/usr/bin/sshpass -p ${NPASS} scp -o StrictHostKeyChecking=no calc.build-${env.BUILD_NUMBER}.gz ${NUSER}@192.168.218.114:/home/acd/Desktop/"
                   }
                }
         }
