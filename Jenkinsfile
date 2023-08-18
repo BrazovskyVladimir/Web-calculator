@@ -58,8 +58,11 @@ pipeline {
     }
     stage('ssh') {
         steps {
-            sshagent(credentials: ['ubuntumaster']) {
-            sh "scp -o StrictHostKeyChecking=no calc.build-${env.BUILD_NUMBER}.gz brazovsky@192.168.218.104:/home/brazovsky/Desktop/DevOpsPr/"
+              withCredentials([sshUserPrivateKey(credentialsId: "ubuntumaster", keyFileVariable: 'keyfile')]) {
+                   stage('scp-f/b') {
+                     sh "scp -o StrictHostKeyChecking=no -i ${keyfile} calc.build-${env.BUILD_NUMBER}.gz brazovsky@192.168.218.104:/home/brazovsky/Desktop/DevOpsPr/"
+                  }
+               }
         }
         }
     }
