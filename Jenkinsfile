@@ -60,11 +60,13 @@ pipeline {
     }
     stage('ssh') {
         steps {
+          container('python') {
               withCredentials([usernamePassword(credentialsId: 'diplom1', usernameVariable: 'NUSER', passwordVariable: 'NPASS')]) {
                   script {
                      sh "/usr/bin/sshpass -p ${NPASS} scp -o StrictHostKeyChecking=no calc.build-${env.BUILD_NUMBER}.gz ${NUSER}@192.168.218.114:/home/acd/Desktop/"
                   }
                }
+        }
         }
         }
     }
