@@ -15,7 +15,7 @@ The main page of the site:
 <img src="https://github.com/SnezhanaM/Web-calculator/blob/master/pictures/main_page.png" width="600" height="250"/>
 
 Next, you need to enter in the URL bar ?expr= a formula for calculating using the urlencode characters. 
-The example shows the expression: 5*(200+50)/10.
+The example shows the expression: 5*(200+50)/10. http://calc-diplom.local/?expr=5%2A%28200%2B50%29%2F10
 
 <img src="https://github.com/SnezhanaM/Web-calculator/blob/master/pictures/input.png" width="600" height="250"/>
 
